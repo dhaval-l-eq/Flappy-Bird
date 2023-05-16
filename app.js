@@ -19,8 +19,14 @@ $(document).on("keydown", (e) => {
   if (e.keyCode === 32 && !gameOver) {
     // 32 means spacebar
     gravity = 5;
-    const currentPos = $("#bird").offset().top;
-    $("#bird").offset({ top: currentPos - 60 });
+    const relativePos = +$("#bird").css("top").slice(0, -2);
+
+    if (relativePos < 0) {
+      $("#bird").css("top", "0");
+    } else {
+      const currentPos = $("#bird").offset().top;
+      $("#bird").offset({ top: currentPos - 60 });
+    }
   }
 });
 
